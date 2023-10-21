@@ -23,8 +23,11 @@ To access the api test, you must postpend with /docs
 
 What needs to be done: 
 1. Create a frontend [x]
-2. Send the data to the backend 
-3. Set up MongoDB
+2. Send the data to the backend [x]
+3. Set up MongoDB [x]
 4. Create a dockerfile [x]
 5. Create a docker-compose file [x]
-6. Setup an upload component
+6. Setup an upload component [x]
+7. Display Information on Front-end in a pleasing way
+8. Get the table showing 
+9. Clean the code, put the imports in main.js

@@ -4,21 +4,23 @@
       <h1>Excel to MongoDB</h1>
       <p>Upload an Excel file to populate a MongoDB database.</p>
     </div>
-    <UploadComponent />
-    <TableComponent class="mt-5" />
+    <div class="d-flex" style="gap: 5px">
+      <UploadComponent />
+      <TableSelector />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import UploadComponent from "@/components/UploadComponent.vue";
-import TableComponent from "@/components/TableComponent.vue";
+import TableSelector from "@/components/TableSelector.vue";
 
 export default {
   name: "HomeView",
   components: {
     UploadComponent,
-    TableComponent,
+    TableSelector,
   },
 };
 </script>
