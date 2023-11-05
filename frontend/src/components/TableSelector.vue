@@ -2,9 +2,10 @@
   <Dropdown
     v-model="selectedTable"
     :options="collectionNames"
-    optionLabel="name"
     placeholder="Select a Database/Collection"
     class="w-full md:w-14rem"
+    :loading="loading"
+    @change="onTableSelect"
   />
 </template>
 
@@ -20,11 +21,28 @@ export default {
     return {
       collectionNames: [],
       selectedTable: null,
+      loading: true,
     };
   },
-  async created() {
-    const response = await axios.get("http://localhost:5000/getDatabases");
-    this.collectionNames = response.data.map((name) => ({ name }));
+  methods: {
+    async refresh() {
+      this.loading = true;
+      const response = await axios
+        .get("http://localhost:5000/getDatabases")
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+      this.collectionNames = response.data.map((name) => name);
+    },
+    onTableSelect() {
+      this.$emit("table-selected", this.selectedTable);
+    },
+  },
+  created() {
+    this.refresh();
   },
 };
 </script>

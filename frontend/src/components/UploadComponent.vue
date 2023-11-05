@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     onUpload() {
-      console.log("UPLOADING");
+      this.$emit("upload");
     },
   },
 };

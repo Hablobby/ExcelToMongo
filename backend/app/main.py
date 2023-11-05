@@ -5,7 +5,6 @@ import shutil
 from pathlib import Path
 import pandas as pd
 from motor.motor_asyncio import AsyncIOMotorClient
-import bson
 from bson import json_util
 import json
 app = FastAPI()
@@ -21,13 +20,21 @@ app.add_middleware(
 
 
 @app.post("/uploadFile")
-async def uploadFile(file: UploadFile):  
-    print(file.filename)
-    df = pd.read_excel(file.file)  # Read the Excel file into a DataFrame
+async def uploadFile(file: UploadFile):
+    # Read the Excel file into a DataFrame
+    df = pd.read_excel(file.file, engine='openpyxl')
+    
+    df = df.where(pd.notna(df), None)
+    
+    # Connect to MongoDB
     client = AsyncIOMotorClient("mongodb://mongodb:27017")
     db = client.Linux
-    collection = db[file.filename.replace('.xlsx', '')]  
-    await collection.insert_many(df.to_dict("records"))  
+    
+    # Create a collection with the filename (excluding the '.xlsx' extension)
+    collection = db[file.filename.replace('.xlsx', '')]
+    await collection.insert_many(df.to_dict("records"))
+    client.close()
+    
     return {"message": "Data uploaded successfully"}
 
 @app.get("/getDatabases")
@@ -42,5 +49,13 @@ async def getCollection(collection_name: str):
     client = AsyncIOMotorClient("mongodb://mongodb:27017")
     db = client.Linux
     collection = db[collection_name]
-    documents = await collection.find().to_list(length=100)
-    return json.loads(json_util.dumps(documents))
+    
+    # Exclude the _id field from the query results
+    projection = {"_id": False}
+    
+    documents = await collection.find({}, projection=projection).to_list(length=100)
+    
+    # Convert documents to JSON without _id
+    json_documents = [json.loads(json_util.dumps(doc)) for doc in documents]
+    
+    return json_documents
