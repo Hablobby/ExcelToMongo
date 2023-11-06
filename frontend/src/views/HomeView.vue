@@ -3,7 +3,6 @@
     <div class="header">
       <h1>Excel to MongoDB</h1>
       <p>Upload an Excel file to populate and create a MongoDB database.</p>
-      <AddOrEditDialog />
     </div>
     <div class="d-flex" style="gap: 5px">
       <UploadComponent @upload="upload" />
@@ -17,7 +16,6 @@
 import UploadComponent from "@/components/UploadComponent.vue";
 import TableSelector from "@/components/TableSelector.vue";
 import DatabaseTable from "@/components/DatabaseTable.vue";
-import AddOrEditDialog from "@/components/AddOrEditDialog.vue";
 
 export default {
   name: "HomeView",
@@ -30,7 +28,6 @@ export default {
     UploadComponent,
     TableSelector,
     DatabaseTable,
-    AddOrEditDialog,
   },
   methods: {
     changeTable(table) {
