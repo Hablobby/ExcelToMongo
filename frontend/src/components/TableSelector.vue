@@ -1,5 +1,5 @@
 <template>
-  <Dropdown
+  <PrimeDropdown
     v-model="selectedTable"
     :options="collectionNames"
     placeholder="Select a Database/Collection"
@@ -10,13 +10,7 @@
 </template>
 
 <script>
-import Dropdown from "primevue/dropdown";
-import axios from "axios";
-
 export default {
-  components: {
-    Dropdown,
-  },
   data() {
     return {
       collectionNames: [],
@@ -27,7 +21,7 @@ export default {
   methods: {
     async refresh() {
       this.loading = true;
-      const response = await axios
+      const response = await this.$axios
         .get("http://localhost:5000/getDatabases")
         .catch((error) => {
           console.log(error);

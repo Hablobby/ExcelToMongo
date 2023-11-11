@@ -8,26 +8,16 @@
       <UploadComponent @upload="upload" />
       <TableSelector ref="tableSelector" @table-selected="changeTable" />
     </div>
-    <DatabaseTable v-if="table" :table="table" />
+    <DatabaseTable v-if="table" :table="table" class="mt-2" />
   </div>
 </template>
 
 <script>
-import UploadComponent from "@/components/UploadComponent.vue";
-import TableSelector from "@/components/TableSelector.vue";
-import DatabaseTable from "@/components/DatabaseTable.vue";
-
 export default {
-  name: "HomeView",
   data() {
     return {
       table: "",
     };
-  },
-  components: {
-    UploadComponent,
-    TableSelector,
-    DatabaseTable,
   },
   methods: {
     changeTable(table) {

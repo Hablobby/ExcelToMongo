@@ -4,17 +4,9 @@
     <p>Loading...</p>
   </div>
 
-  <Card v-else style="width: 80%">
+  <PrimeCard v-else style="width: 80%">
     <template #title>
       <h3>{{ table }}</h3>
-
-      <Button
-        icon="pi pi-plus"
-        class="p-button-rounded p-button-success p-button-outlined"
-        @click="$refs.addOrEditDialog.openDialog()"
-      >
-        Add
-      </Button>
     </template>
     <template #content>
       <DataTable
@@ -26,7 +18,7 @@
         paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
         currentPageReportTemplate="{first} to {last} of {totalRecords}"
       >
-        <Column
+        <PrimeColumn
           v-for="col in columns"
           :key="col.field"
           :field="col.field"
@@ -34,23 +26,11 @@
         />
       </DataTable>
     </template>
-    <AddOrEditDialog ref="addOrEditDialog" v-if="table" :table="table" />
-  </Card>
+  </PrimeCard>
 </template>
 
 <script>
-import DataTable from "primevue/datatable";
-import Column from "primevue/column";
-import Card from "primevue/card";
-import AddOrEditDialog from "./AddOrEditDialog.vue";
-
 export default {
-  components: {
-    DataTable,
-    Column,
-    Card,
-    AddOrEditDialog,
-  },
   data() {
     return {
       tableContents: [],

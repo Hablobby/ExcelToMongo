@@ -1,5 +1,5 @@
 <template>
-  <FileUpload
+  <PrimeFileUpload
     mode="basic"
     name="file"
     accept=".xlsx"
@@ -12,12 +12,7 @@
 </template>
 
 <script>
-import FileUpload from "primevue/fileupload";
-
 export default {
-  components: {
-    FileUpload,
-  },
   data() {
     return {
       files: null,
