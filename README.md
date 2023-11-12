@@ -1,6 +1,4 @@
-Certainly! Here's the template in Markdown format:
 
-```markdown
 # ExcelToMongo
 **ExcelToMongo** is a simple web application designed to convert Excel files into MongoDB databases. This tool is particularly useful for users looking to upload Excel files and assets without the need for extensive database knowledge or developer intervention. This application serves as a proof of concept for a larger project aimed at simplifying database creation from user-uploaded files.
 
